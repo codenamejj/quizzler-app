@@ -42,7 +42,7 @@ class QuizInterface:
         n_quiz = self.q_next.next_question()
         self.canvas.itemconfig(self.question, text=n_quiz)
 
-    def answer_true(self):
+    def answer_true(self):   
         self.limiter += 1
         if self.limiter <= len(self.q_next.question_list):
             if self.q_next.check_answer('True'):
@@ -52,6 +52,8 @@ class QuizInterface:
 
             else:
                 self.canvas.config(width=300, height=250, bg='red')
+        else:
+            self.true_button.config(state="disabled")
         self.window.after(1000, self.find_exception)
 
     def answer_false(self):
@@ -64,6 +66,9 @@ class QuizInterface:
 
             else:
                 self.canvas.config(width=300, height=250, bg='red')
+
+        else:
+            self.false_button.config(state="disabled")
         self.window.after(1000, self.find_exception)
 
     def find_exception(self):
